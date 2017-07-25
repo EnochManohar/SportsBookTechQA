@@ -1,0 +1,97 @@
+ ```
+**Section B: Case 2:**
+ ```
+ 
+Without any implementation needed, how would you execute the following different types of performance tests on any endpoint of your choosing?
+
+ * Load testing : testing the system under test using maximum designed user load and measure the KPI's.
+ 
+ * Stress testing : we measure the breaking point of the system under test going beyond the maximum designed user load and try to identify the crash point of the application and measure the KPI's.
+ 
+ * Endrance testing : is a type of performance test which is usually used to determine how much a system can sustain the continous expected load over a extended period of time (ex: 24 hrs, 48 hrs). During the tests we monitor the KPI's
+ 
+ * Spike testing : is a type of performance test where the objective is to test system's stability during bursts of concurrent users or varying degree of load over varying time periods.
+ 
+ * Volume testing : is a type of performance test where the volume refers to testing the software application/product with a certain amount of data in the dastabase ex: testing the the application using 50% filled up DB or 70% filled up DB with the designed user load. We do measure the KPI's both at app and DB layer.
+ 
+ * Scalability testing : this is the ability of system under test to continue to function well, when changes are done in size (user) or volume (data) of hte system to meeting growing needs. Scalability testing is one of the important inputs for capacity planning both application, database and infrastructure capacity for future needs.
+ 
+ Note: all the above different types of performance tests during execution we will be monitoring the KPI's 
+ KPI's: Key Performance Indicators: CPU * Memory Utilization, Network, response time, throughput, etc.
+ 
+ 
+ 
+ 
+ ```
+ **1) Without implementation how to execute the above different tests?**
+ ```
+ ans: 
+ 
+ **Scenario 1: Small company (user base: < 50)**
+ 
+ Without any tooling they can conduct a session like bugbash (or performance bash) gather all the employees and ask them to run through the performance test case at one sitting. Gather the metrices using stopwatch and collate the results, - here they can get response numbers via stopwatch but KPI's unless some tool is used or some one takes screenshot of taskmanager - the metrices is restricted to stopwatch numbers.
+ 
+ **Scenario 2: Medium company (user base < 5000)**
+ 
+ Will be very difficult without some automation tool which generates virtual user load. This companies can go for some opensource tool or low cost licenced tool.
+ 
+ without any tool implementation following would be an idea to guess the performance of the application under test:
+ 1) Ask functional testers and/or user acceptance testers to record their opinion about performance. 
+ 2) Have developers put stopwatch timers in their unit test cases and record response numbers.
+ 3) or unconventional method: hire a bunch of interns to do low cost manual stopwatch tests or outsource the same for other cheap manual job out of orginization.
+ 4) Have special performance builds made with timestamp strategically outputs response numbers to log file.
+ 5) If the appication is public facing then they can ask a community / public in general to test the beta version of the application.
+
+
+**Secenario 3: Big user base companies (user base > 100,000)**
+
+Load testing tool will be totally impractial even though we can test to a certain extent and mathametically scale the capacity to infinity to understand the capacity of the infrastructure.
+
+**Two methods:**
+1) Have a beta build and ask the community / the public facing user base to signup for the beta build and ask them to be a beta tester. This will enable to test new unrelease version of the appliation and since this is a beta version people would know the application will have some bugs. Definitely with this approach we can have large user load without any automated load generators via any tool. when people are using the beta build they can encounter some bugs and individual users can send the statistics of the error encountered and report automatically to the development companies.
+
+Most of the large user base companies are using this method to do load testing and are successful in doing all sorts of non-functiona tests using this method.
+Many companies like facebook and google etc are releaseing the beta build especially in mobile front to do this kinda testing.
+
+2) Deploy the new release build to preproduction and divert some real traffic to this environment based on the user load (say 1 million users) and do what ever non-functional testing say for 4 hours or 5 hours. 
+
+this method is noted in facebook web application where in few countries gets some changes and they people keep posting that status update is not happening issues with facebook etc but where some other region wouldnt have such issues and things will be normal.
+
+but the second method is advised to have a window frame since users will feel that application is worth using. play with the real users but not too much for a long time.
+
+
+
+
+ ```
+**How would you store your result set?**
+ ```
+Many methods, excel sheet, database, Continous integration logs, InfluxDB + Grafana, ELK stack. 
+
+
+
+
+ ```
+**What KPI's would you be after?**
+ ```
+number of users, min max average Response time, CPU utilization, Memory utilization, Disk, I/O, hits per second, error per second, network latency, connect time, throughput, median, 90, 95, 99th percentile - these are the basic KPI's for any perforamnce tests.
+
+KPI's can go deep into how much time was spent in each node, each router, - if we encounter issue in network.
+
+Top indepth metrices:
+1) busy and idle threads
+2) bandwidth requirements
+3) Time spent in logical tire / layer
+4) Number of calls into a logical tire / layer
+5) understanding the trends of graphs over time to identify the bottleneks and potential issues.
+
+
+
+
+ ```
+**How could you make the tests consistently reproducible on demand?**
+ ```
+ans: Results cannot be consistently reproducible (can be close enought build build but not the same)
+
+Tests can be made reproducible on demand using automation like using Jmeter for API tests and integrate the same with jenkins. Once the build is ready we can automatically deploy the build to QA environment once the smoke test is done - jenkins automatically promotes the build to performance environment and automatically starts the jmeter or soapUI tests and provide the metrices.
+
+This methods of Continous Integration and Continous Deployment, I was a part of this experience.
