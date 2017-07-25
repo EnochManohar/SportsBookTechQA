@@ -1,0 +1,45 @@
+Section A: Simple programming task:
+
+Describe an algorithm which sums all numbers from 1 to 1000000 both numbers inclusive in the simplest possible way.
+
+Answer:
+  Logic - Lets sum 1 to 5
+          1+2+3+4+5 = 15
+  
+          Lets sum 1 to 30
+          1+2+3+4+5+6+7+8+9+10+11+12+13+14+15+16+17+18+19+20+21+22+23+24+25+26+27+28+29+30 = 465
+          
+  Formula - [n(n+1)/2] 
+             n is the maximum number to be added
+  
+          ex 1: sum of 1 to 5
+                [5(5+1)/2] = 15
+          
+          ex 2: sum of 1 to 30
+                [30(30+1)/2] = 465
+  
+  solution to question: sum of all numbers from 1 to 1000000
+                
+                [1000000(1000000+1)/2] = 500 000 500 000
+ 
+ sample Code in C:
+ 
+ #include <stdio.h>
+ 
+ void main()
+ {
+    long num, temp, digit, sum = 0;
+    printf("Enter the number \n");
+    scanf("%ld", &num);
+    temp = num;
+    while (num > 0)
+    {
+        digit = num % 10;
+        sum = sum + digit;
+        num /= 10;
+    }
+ 
+    printf("Given number = %ld\n", temp);
+    printf("Sum of the digits %ld = %ld\n", temp, sum);
+ }
+ 
